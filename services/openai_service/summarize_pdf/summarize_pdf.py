@@ -21,7 +21,7 @@ async def summarize_text(text: str) -> str:
         truncated_text = text[:max_text_length]
 
         response = openai.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-3.5-turbo-instruct",
             prompt=(
                 "You are a highly skilled summarization expert. "
                 "Please provide a concise and informative summary of the following text. "
