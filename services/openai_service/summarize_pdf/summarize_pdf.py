@@ -1,9 +1,11 @@
-import openai
+from openai import OpenAI
 from fastapi import HTTPException
 from config import settings
 
 
-openai.api_key = settings.OPENAI_API_KEY
+client = OpenAI(
+    api_key=settings.OPENAI_API_KEY,
+)
 
 
 async def summarize_text(text: str) -> str:
@@ -20,7 +22,7 @@ async def summarize_text(text: str) -> str:
         max_text_length = 4096 - 500
         truncated_text = text[:max_text_length]
 
-        response = openai.completions.create(
+        response = client.completions.create(
             model="gpt-3.5-turbo-instruct",
             prompt=(
                 "You are a highly skilled summarization expert. "
